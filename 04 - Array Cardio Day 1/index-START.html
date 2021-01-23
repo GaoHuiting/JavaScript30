@@ -29,65 +29,53 @@
 
       // Array.prototype.filter()
       // 1. Filter the list of inventors for those who were born in the 1500's
-      const fifs = inventors.filter((inventor) => {
-        for (i = 0; i <= inventors.length; i++) {
-          if ((inventor.year >= 1500) & (inventor.year < 1600)) {
-            return inventor;
-          }
-        }
-      });
-      console.table(fifs);
+
+      const fifteens = inventors.filter(
+        (inv) => inv.year >= 1500 && inv.year <= 1600
+      );
+
+      console.table(fifteens);
 
       // Array.prototype.map()
       // 2. Give us an array of the inventors first and last names
-      const invList = inventors.map(
-        (name) => (fullname = `${name.first} ${name.last}`)
-      );
+      const fullname = inventors.map((inv) => `${inv.first} ${inv.last}`);
 
-      console.log(invList);
+      console.table(fullname);
 
       // Array.prototype.sort()
       // 3. Sort the inventors by birthdate, oldest to youngest
-      // const sort = inventors.sort(function (a, b) {
-      //   if (a.year > b.year) {
-      //     return 1;
-      //   } else {
-      //     return -1;
-      //   }
-      // });
+      const sorting = inventors.sort(function (a, b) {
+        let first = a.passed - a.year;
+        let sec = b.passed - b.year;
+        return first > sec ? -1 : 1;
+      });
 
-      const sort = inventors.sort((a, b) => (a.year > b.year ? 1 : -1));
-
-      console.table(sort);
+      console.table(sorting);
 
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live all together?
-
-      const toge = inventors.reduce((total, inventor) => {
-        return total + (inventor.passed - inventor.year);
+      const years = inventors.reduce(function (totalY, firstYear) {
+        let age = firstYear.passed - firstYear.year;
+        console.log(age);
+        return totalY + age;
       }, 0);
 
-      console.log(toge);
+      console.log(years);
 
       // 5. Sort the inventors by years lived
-      const lived = inventors.sort((c, d) => {
-        let lastGuy = c.passed - c.year;
-        let firstGuy = d.passed - d.year;
-
-        return lastGuy > firstGuy ? 1 : -1;
-      });
-
-      console.table(lived);
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-      // const cities = Array.from(document.querySelectorAll(".mw-category a"));
 
-      // const de = cities
-      //   .map((city) => city.innerHTML)
-      //   .filter((streetName) => streetName.includes("de"));
+      // const links = Array.from(
+      //   document.querySelectorAll(".mw-category-group a")
+      // );
 
-      // console.log(de);
+      // const list = links
+      //   .map((city) => city.textContent)
+      //   .filter((city) => city.includes("de"));
+
+      // console.log(list);
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
@@ -136,13 +124,13 @@
         "Biondo, Frank",
       ];
 
-      const person = people.sort((thisPerson, nextPerson) => {
-        let [aFirst, aLast] = thisPerson.split(", ");
-        let [bFirst, bLast] = nextPerson.split(", ");
-        return aLast > bLast ? -1 : 1;
+      const sort = people.sort((a, b) => {
+        let [firstA, lastA] = a.split(", ");
+        let [firstB, lastB] = b.split(", ");
+        return lastA > lastB ? -1 : 1;
       });
 
-      console.table(person);
+      console.table(sort);
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
@@ -163,15 +151,31 @@
         "truck",
       ];
 
-      const trans = data.reduce(function (obj, item) {
-        if (!obj[item]) {
-          obj[item] = 0;
+      const sum = data.reduce((totalNum, item) => {
+        console.log(totalNum);
+        if (!totalNum.item) {
+          totalNum.item = 0;
         }
-        obj[item]++;
-        return obj;
+        totalNum.item++;
+        return totalNum;
       }, {});
 
-      console.log(trans);
+      console.log(sum);
+
+      // let salaries = {
+      //   John: 100,
+      //   Pete: 300,
+      //   Mary: 250,
+      // };
+
+      // console.log(salaries.John);
+
+      var myCar = new Object();
+      myCar["make"] = "Ford";
+      myCar["model"] = "Mustang";
+      myCar["year"] = 1969;
+
+      console.log(myCar);
     </script>
   </body>
 </html>
